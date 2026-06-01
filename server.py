@@ -184,6 +184,43 @@ def run_server(port: int = 5000):
     print("Нажмите Ctrl+C для остановки")
     httpd.serve_forever()
 
+"""
+как перекинуть файл: 
+scp "D:\Учёба\bookstore.jar" bob@10.226.75.156:/home/bob/
+
+создать /var/www/app c 755
+скопировать файлы приложения туда
+"""
+
+"""
+/etc/nginx/sites-available/bookstore
+server {
+    listen 80;
+    server_name _;
+    
+    location / {
+        proxy_pass http://127.0.0.1:5000;
+    }
+}
+
+и создаём сслыку на это:
+sudo ln -s /etc/nginx/sites-available/bookstore /etc/nginx/sites-enabled/
+"""
 
 if __name__ == '__main__':
     run_server()
+
+"""
+/etc/systemd/system/bookstore.service
+[Unit]
+Description=Simple bookstore
+After=network.target
+
+[Service]
+Type=simple
+User=boris
+ExecStart=/usr/bin/python3 /var/www/app/server.py
+
+[Install]
+WantedBy=multi-user.target
+"""
