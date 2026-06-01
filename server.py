@@ -188,6 +188,15 @@ def run_server(port: int = 5000):
 как перекинуть файл: 
 scp "D:\Учёба\bookstore.jar" bob@10.226.75.156:/home/bob/
 
+как узнать какой процесс на 5000:
+sudo lsof -i :5000
+
+удалить по PID:
+sudo kill -9 12345
+"""
+
+
+"""
 создать /var/www/app c 755
 скопировать файлы приложения туда
 """
@@ -203,7 +212,7 @@ server {
     }
 }
 
-и создаём сслыку на это:
+и создаём ссылку на это:
 sudo ln -s /etc/nginx/sites-available/bookstore /etc/nginx/sites-enabled/
 """
 
